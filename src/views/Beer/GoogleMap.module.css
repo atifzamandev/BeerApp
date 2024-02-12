@@ -1,0 +1,10 @@
+.googleContaine {
+  display: flex;
+  justify-content: center;
+}
+
+.leafletContainer {
+  height: 50vh;
+  width: 95%;
+  margin: 10px;
+}
