@@ -130,7 +130,7 @@ const BeerTable = ({
       </TableContainer>
       <TablePagination
         component="div"
-        count={beerList.length}
+        count={filteredBeerList.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

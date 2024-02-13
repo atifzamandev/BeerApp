@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { fetchData } from "./utils"
+import { fetchData} from "./utils"
+import { getRandomBeerList } from '../../api';
 import { Beer } from "../../types"
 import { Link as RouterLink } from "react-router-dom"
 import {
@@ -24,6 +25,7 @@ const Home = () => {
   const [savedList, setSavedList] = useState<Array<Beer>>([])
   const [storeBeerId, setStoreBeerId] = useState<string[]>([])
   const [search, setSearch] = useState<string>("")
+  const [reload, setReload] = useState<boolean>(true)
 
 
   useEffect(() => {
@@ -62,9 +64,12 @@ const Home = () => {
     setSavedList([])
     localStorage.setItem("beerId", JSON.stringify([]))
   }
-
+  const handleReload =async()=>{
+    const {data} = await getRandomBeerList(10);
+    setBeerList(data)
+  }
   // eslint-disable-next-line
-  useEffect(fetchData.bind(this, setBeerList), [])
+  useEffect(fetchData.bind(this, setBeerList), [reload])
   return (
     <article>
       <section>
@@ -77,7 +82,7 @@ const Home = () => {
                   variant="outlined"
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                <Button variant="contained" >Reload list</Button>
+                <Button variant="contained" onClick={handleReload}>Reload list</Button>
               </div>
               <ul className={styles.list}>
                 {beerList
