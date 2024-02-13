@@ -25,8 +25,6 @@ const Home = () => {
   const [savedList, setSavedList] = useState<Array<Beer>>([])
   const [storeBeerId, setStoreBeerId] = useState<string[]>([])
   const [search, setSearch] = useState<string>("")
-  const [reload, setReload] = useState<boolean>(true)
-
 
   useEffect(() => {
     const storedBeerIds = localStorage.getItem("beerId")
@@ -69,7 +67,7 @@ const Home = () => {
     setBeerList(data)
   }
   // eslint-disable-next-line
-  useEffect(fetchData.bind(this, setBeerList), [reload])
+  useEffect(fetchData.bind(this, setBeerList), [])
   return (
     <article>
       <section>
